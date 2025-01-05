@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyspark-asyncactions-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pyspark-asyncactions-{{ version }}.tar.gz
   sha256: ac9213b588633d55ee788c50c2e254b2d20262ab5f13b8ae86be26f2b2146c2e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
-    - python
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -31,6 +31,7 @@ test:
   requires:
     - pip
     - pyspark
+    - python {{ python_min }}
 
 about:
   home: https://github.com/zero323/pyspark-asyncactions
